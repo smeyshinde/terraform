@@ -10,9 +10,9 @@ variable "this_kryvalue" {
      default = "sample"
 }
 
-variable "this_count" {
-     default = 2
-}
+#variable "this_count" {
+ #    default = 2
+#}
 
 variable "this_sg" {
      default = "sg-066b3750660930b00"

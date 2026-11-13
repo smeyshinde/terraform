@@ -18,7 +18,7 @@ resource "aws_instance" "webserver_block" {
       sudo yum install  nginx -y
       sudo systemctl start nginx
       EOF
-    count = var.this_count
+    #count = var.this_count
   }
 resource "aws_security_group" "ws_sgblock" {
   ingress {
@@ -44,4 +44,14 @@ resource "aws_security_group" "ws_sgblock" {
   tags = {
     Name = "webserver-sg"
   }
+}
+
+output "this_instancepubIp" {
+  value = aws_instance.webserver_block.public_ip
+}
+output "this_instanceprivateDns" {
+   value = aws_instance.webserver_block.private_dns
+}
+output "this_instanceIp" {
+  value = aws_instance.webserver_block.id
 }
