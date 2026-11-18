@@ -8,7 +8,7 @@ resource "aws_instance" "webserver_block" {
   ami             = var.this_webserveami
   instance_type   = var.this_instacnectype
   key_name        = var.this_kryvalue
-  vpc_security_group_ids = [var.this_sg,aws_security_group.ws_sgblock.id ]
+  vpc_security_group_ids = [data.aws_security_group.sgdata.id]
   tags = {
     name = "webserver"
   }
@@ -53,4 +53,8 @@ output "this_instanceprivateDns" {
 }
 output "this_instanceIp" {
   value = aws_instance.webserver_block.id
+}
+
+data "aws_security_group" "sgdata" {
+   name = "default" 
 }
