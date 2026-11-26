@@ -4,6 +4,7 @@ provider "aws" {
 }
 
 #block    clod provider   uniqe block name
+# count loop
 resource "aws_instance" "webserver_block" {
   ami             = var.this_webserveami
   instance_type   = var.this_instacnectype
@@ -20,7 +21,7 @@ resource "aws_instance" "webserver_block" {
       EOF
   }
 
-# 
+# for each loop
 resource "aws_instance" "webserver_blocknew" {
   ami             =  each.value
   for_each = toset(var.ami_types)
@@ -39,4 +40,12 @@ resource "aws_instance" "webserver_blocknew" {
 
 variable "ami_types" {
   default = ["ami-0593d733c2fc5bd2e","ami-02f853b31ccb5871f","ami-0e3d66c690eb97869"]
+}
+
+#for loop
+output "aws_ec2" {
+   value = [
+     for indt in var.ami_types:
+        aws_instance.webserver_blocknew[inst].public_ip
+   ]
 }
