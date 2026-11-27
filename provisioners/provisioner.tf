@@ -19,7 +19,7 @@ resource "aws_instance" "webserver_block" {
       EOF
    provisioner "file" {
      source = "data.sql"
-     destination = "/tmp/datasql"
+     destination = "/home/ec2-user/datasql"
    }
 
    provisioner "remote-exec" {
